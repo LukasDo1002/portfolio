@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUKAS — Selected Works</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   FIELD NOTES — portfolio for kinetic / interactive work
+   Palette: workshop drawing. Paper, graphite, steel, working blue.
+   ============================================================ */
+:root{
+  --paper:#ECEDEA;
+  --card:#FAFAF8;
+  --ink:#17181A;
+  --steel:#8E918D;
+  --line:#C8CAC4;
+  --blue:#2B3CFF;
+  --blue-soft:rgba(43,60,255,.07);
+  --mono:'IBM Plex Mono', ui-monospace, monospace;
+  --sans:'Archivo', system-ui, sans-serif;
+  --display:'Archivo Black', 'Archivo', sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:15px;
+  line-height:1.55;
+  overflow:hidden;
+}
+/* faint blueprint grid on the field */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size:72px 72px;
+  opacity:.28;
+}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+a{color:inherit}
+::selection{background:var(--blue);color:#fff}
+
+/* ---------- header ---------- */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:40;
+  display:flex;justify-content:space-between;align-items:flex-start;
+  padding:22px 26px;pointer-events:none;
+}
+header > *{pointer-events:auto}
+.wordmark{font-family:var(--display);font-size:26px;letter-spacing:.02em;line-height:1}
+.wordmark span{color:var(--blue)}
+.statement{
+  font-family:var(--mono);font-size:11px;color:var(--steel);
+  margin-top:6px;max-width:340px;letter-spacing:.02em;
+}
+.head-right{display:flex;gap:10px;align-items:center}
+
+/* ---------- filter bench (bottom) ---------- */
+nav.bench{
+  position:fixed;left:50%;bottom:24px;transform:translateX(-50%);
+  z-index:40;display:flex;gap:8px;align-items:center;
+  background:var(--card);border:1px solid var(--ink);
+  padding:8px;box-shadow:4px 4px 0 var(--ink);
+}
+.bench-label{
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+  color:var(--steel);padding:0 8px 0 6px;text-transform:uppercase;
+}
+.f-btn{
+  font-family:var(--mono);font-size:12px;letter-spacing:.06em;
+  text-transform:uppercase;padding:8px 14px;border:1px solid var(--line);
+  background:var(--card);transition:all .15s ease;
+}
+.f-btn:hover{border-color:var(--ink)}
+.f-btn[aria-pressed="true"]{
+  background:var(--blue);border-color:var(--blue);color:#fff;
+}
+.f-btn .n{opacity:.55;margin-left:4px}
+
+.chip{
+  font-family:var(--mono);font-size:12px;letter-spacing:.06em;
+  text-transform:uppercase;padding:9px 14px;
+  border:1px solid var(--ink);background:var(--card);
+  box-shadow:3px 3px 0 var(--ink);transition:transform .12s ease, box-shadow .12s ease;
+}
+.chip:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--ink)}
+.chip:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.chip.blue{background:var(--blue);color:#fff;border-color:var(--ink)}
+.chip .dot{display:inline-block;width:7px;height:7px;border-radius:50%;
+  background:#fff;margin-right:7px;animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* ---------- the field ---------- */
+#field{position:fixed;inset:0;z-index:10}
+.work{
+  position:absolute;top:0;left:0;width:218px;
+  background:var(--card);border:1px solid var(--ink);
+  box-shadow:5px 5px 0 rgba(23,24,26,.9);
+  cursor:pointer;will-change:transform;
+  transition:opacity .5s ease, filter .5s ease, box-shadow .2s ease;
+}
+.work:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.work .cover{height:140px;border-bottom:1px solid var(--ink);overflow:hidden;background:#fff}
+.work .cover svg,.work .cover img{width:100%;height:100%;object-fit:cover;display:block}
+.work .meta{
+  display:flex;justify-content:space-between;gap:8px;
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.02em;
+  padding:9px 11px;align-items:baseline;
+}
+.work .meta .t{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.work .meta .y{color:var(--steel)}
+.work .cat-tag{
+  position:absolute;top:-9px;left:10px;font-family:var(--mono);font-size:9px;
+  letter-spacing:.12em;text-transform:uppercase;background:var(--ink);color:var(--paper);
+  padding:2px 7px;
+}
+.work .blurb{
+  max-height:0;opacity:0;overflow:hidden;
+  font-size:12.5px;line-height:1.45;color:var(--ink);
+  padding:0 11px;transition:max-height .25s ease, opacity .25s ease, padding .25s ease;
+  border-top:0 solid var(--line);
+}
+.work.hover{z-index:30;box-shadow:9px 9px 0 var(--blue)}
+.work.hover .blurb{max-height:90px;opacity:1;padding:9px 11px;border-top:1px solid var(--line)}
+.work.dim{opacity:.22;filter:grayscale(1);pointer-events:auto}
+.work.lit{z-index:25}
+
+/* ---------- overlays (dossier / workbench / info) ---------- */
+.overlay{
+  position:fixed;inset:0;z-index:100;display:none;
+  background:rgba(23,24,26,.45);backdrop-filter:blur(3px);
+  overflow-y:auto;padding:6vh 18px 8vh;
+}
+.overlay.open{display:block}
+.sheet{
+  max-width:880px;margin:0 auto;background:var(--card);
+  border:1px solid var(--ink);box-shadow:10px 10px 0 var(--ink);
+  position:relative;
+}
+.sheet-head{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  padding:26px 28px 18px;border-bottom:1px solid var(--ink);gap:16px;
+  position:sticky;top:0;background:var(--card);z-index:5;
+}
+.sheet-head h2{font-family:var(--display);font-size:clamp(22px,4vw,34px);line-height:1.05}
+.sheet-sub{font-family:var(--mono);font-size:12px;color:var(--steel);margin-top:8px;letter-spacing:.04em;text-transform:uppercase}
+.x{
+  font-family:var(--mono);font-size:13px;border:1px solid var(--ink);
+  padding:8px 13px;background:var(--paper);flex:none;
+  box-shadow:3px 3px 0 var(--ink);
+}
+.x:hover{background:var(--blue);color:#fff}
+.sheet-body{padding:24px 28px 34px}
+.lede{font-size:17px;line-height:1.5;max-width:640px;border-left:3px solid var(--blue);padding-left:14px;margin-bottom:18px}
+.desc{max-width:640px;color:#33352f}
+.desc p{margin-bottom:12px}
+.media{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px}
+.media figure{border:1px solid var(--ink);background:#fff}
+.media figure.wide{grid-column:1/-1}
+.media .frame{aspect-ratio:16/10;background:var(--paper);display:block;width:100%;object-fit:cover}
+.media iframe,.media video{aspect-ratio:16/9;width:100%;display:block;border:0;background:#000}
+.media figcaption{
+  font-family:var(--mono);font-size:11px;color:var(--steel);
+  padding:7px 10px;border-top:1px solid var(--line);
+}
+.section-tag{
+  font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--blue);margin:26px 0 10px;display:flex;align-items:center;gap:10px;
+}
+.section-tag::after{content:"";flex:1;height:1px;background:var(--line)}
+
+/* ---------- workbench log ---------- */
+.log-entry{border:1px solid var(--ink);margin-bottom:18px;background:#fff}
+.log-head{
+  display:flex;gap:14px;align-items:baseline;padding:12px 16px;
+  border-bottom:1px solid var(--line);flex-wrap:wrap;
+}
+.log-date{font-family:var(--mono);font-size:11px;color:var(--blue);letter-spacing:.06em}
+.log-title{font-weight:600;font-size:15px}
+.log-note{padding:12px 16px;font-size:13.5px;color:#33352f;max-width:600px}
+.log-media{border-top:1px solid var(--line)}
+.log-media iframe,.log-media video{width:100%;aspect-ratio:16/9;display:block;border:0;background:#000}
+.howto{
+  font-family:var(--mono);font-size:11.5px;line-height:1.7;color:var(--steel);
+  border:1px dashed var(--steel);padding:14px 16px;margin-top:22px;
+}
+.howto b{color:var(--ink)}
+
+/* ---------- info ---------- */
+.bio{max-width:560px}
+.bio p{margin-bottom:13px}
+.bio .mono{font-family:var(--mono);font-size:12px;color:var(--steel)}
+.contact-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+
+/* ---------- mobile: field becomes a scattered scroll ---------- */
+@media (max-width:720px){
+  body{overflow:auto}
+  #field{position:static;padding:130px 16px 110px;display:flex;flex-direction:column;gap:26px;align-items:center}
+  .work{position:relative;width:min(340px,92vw)}
+  .work .cover{height:180px}
+  .work .blurb{max-height:none;opacity:1;padding:9px 11px;border-top:1px solid var(--line)}
+  header{padding:16px}
+  nav.bench{bottom:14px;flex-wrap:wrap;justify-content:center;max-width:94vw}
+  .media{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  .work{transition:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="wordmark">LUKAS<span>.</span></div>
+    <div class="statement">Kinetic sculpture · interactive installation · audiovisual work — making perceptual and cognitive structures perceptible.</div>
+  </div>
+  <div class="head-right">
+    <button class="chip blue" id="workbenchBtn"><span class="dot"></span>Workbench</button>
+    <button class="chip" id="infoBtn">Info</button>
+  </div>
+</header>
+
+<div id="field" aria-label="Floating index of works"></div>
+
+<nav class="bench" aria-label="Filter works">
+  <span class="bench-label">Field</span>
+  <button class="f-btn" data-cat="all" aria-pressed="true">All</button>
+  <button class="f-btn" data-cat="installation" aria-pressed="false">Installation</button>
+  <button class="f-btn" data-cat="video" aria-pressed="false">Video</button>
+  <button class="f-btn" data-cat="other" aria-pressed="false">Other</button>
+</nav>
+
+<!-- project dossier -->
+<div class="overlay" id="dossier" role="dialog" aria-modal="true">
+  <div class="sheet">
+    <div class="sheet-head">
+      <div>
+        <h2 id="dTitle"></h2>
+        <div class="sheet-sub" id="dSub"></div>
+      </div>
+      <button class="x" data-close>Close ✕</button>
+    </div>
+    <div class="sheet-body">
+      <p class="lede" id="dLede"></p>
+      <div class="desc" id="dDesc"></div>
+      <div class="section-tag">Documentation &amp; process</div>
+      <div class="media" id="dMedia"></div>
+    </div>
+  </div>
+</div>
+
+<!-- workbench: live window into work in progress -->
+<div class="overlay" id="workbench" role="dialog" aria-modal="true">
+  <div class="sheet">
+    <div class="sheet-head">
+      <div>
+        <h2>Workbench</h2>
+        <div class="sheet-sub">Ongoing · unfinished · live from the studio</div>
+      </div>
+      <button class="x" data-close>Close ✕</button>
+    </div>
+    <div class="sheet-body">
+      <div id="logFeed"></div>
+      <div class="howto">
+        <b>Posting from anywhere:</b> open your CMS (pagescms.org → Workbench), add an entry,
+        save — the site redeploys itself. Video sources: <b>youtube</b> / <b>vimeo</b> (paste the
+        video ID) or <b>file</b> (paste a direct .mp4 link, e.g. a Nextcloud / NAS public link).
+        Newest entries appear at the top automatically.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- info -->
+<div class="overlay" id="info" role="dialog" aria-modal="true">
+  <div class="sheet">
+    <div class="sheet-head">
+      <div>
+        <h2>Info</h2>
+        <div class="sheet-sub">About · contact</div>
+      </div>
+      <button class="x" data-close>Close ✕</button>
+    </div>
+    <div class="sheet-body">
+      <div class="bio">
+        <p>Lukas is an artist working between kinetic sculpture, interactive installation and
+        audiovisual systems. His work makes perceptual and cognitive structures perceptible —
+        building situations where attention, presence and pattern-recognition become material.</p>
+        <p>Trained first in psychology (B.Sc.) and interaction design (M.Sc.), he now studies in the
+        Design, Art &amp; Technology programme at ArtEZ, Arnhem (NL). His practice runs on hand-wound
+        coils, microcontrollers, projection, tensioned membranes and whatever the flea market offers.</p>
+        <p class="mono">Based in Arnhem, Netherlands.</p>
+        <div class="contact-row">
+          <a class="chip" href="mailto:hello@example.com">Email</a>
+          <a class="chip" href="#" target="_blank" rel="noopener">Instagram</a>
+          <a class="chip" href="#" target="_blank" rel="noopener">Are.na</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   CONTENT lives in content/projects.json and content/workbench.json
+   — edit those through the CMS (see README), never this file.
+   ============================================================ */
+let PROJECTS = [], WORKBENCH_FEED = [];
+
+/* ============================================================
+   2. ENGINE — no edits needed below this line.
+   ============================================================ */
+const field = document.getElementById('field');
+const isMobile = () => matchMedia('(max-width:720px)').matches;
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* generated cover patterns: signal drawings in ink + blue */
+function patternSVG(seed){
+  const rnd = mulberry(seed*977+13);
+  const kind = seed % 3;
+  let inner = '';
+  if(kind===0){ // filings: short oriented strokes
+    for(let i=0;i<160;i++){
+      const x=rnd()*220, y=rnd()*150, a=(Math.sin(x/40)+Math.cos(y/30))*40;
+      const dx=Math.cos(a)*7, dy=Math.sin(a)*7;
+      const c = rnd()<.12 ? '#2B3CFF' : '#17181A';
+      inner += `<line x1="${x-dx}" y1="${y-dy}" x2="${x+dx}" y2="${y+dy}" stroke="${c}" stroke-width="1.6"/>`;
+    }
+  } else if(kind===1){ // mist: soft dot field
+    for(let i=0;i<220;i++){
+      const x=rnd()*220, y=rnd()*150, r=rnd()*3+0.5;
+      const c = rnd()<.1 ? '#2B3CFF' : '#17181A';
+      inner += `<circle cx="${x}" cy="${y}" r="${r}" fill="${c}" opacity="${(rnd()*.5+.25).toFixed(2)}"/>`;
+    }
+  } else { // scan: horizontal signal lines
+    for(let y=6;y<150;y+=8){
+      let d=`M0 ${y}`;
+      for(let x=0;x<=220;x+=10){ d+=` L${x} ${y + (rnd()-.5)*(rnd()<.1?26:5)}`; }
+      const c = rnd()<.15 ? '#2B3CFF' : '#17181A';
+      inner += `<path d="${d}" fill="none" stroke="${c}" stroke-width="1.3"/>`;
+    }
+  }
+  return `<svg viewBox="0 0 220 150" xmlns="http://www.w3.org/2000/svg"><rect width="220" height="150" fill="#FAFAF8"/>${inner}</svg>`;
+}
+function mulberry(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+
+/* build cards */
+let cards = [];
+function makeCard(p,i){
+  const el = document.createElement('article');
+  el.className='work';
+  el.tabIndex=0;
+  el.setAttribute('role','button');
+  el.setAttribute('aria-label', p.title + ' — open project');
+  const coverHTML = p.cover
+    ? `<img src="${p.cover}" alt="">`
+    : patternSVG(i+1);
+  el.innerHTML = `
+    <span class="cat-tag">${p.category}</span>
+    <div class="cover">${coverHTML}</div>
+    <div class="meta"><span class="t">${p.title}</span><span class="y">${p.year}</span></div>
+    <div class="blurb">${p.blurb}</div>`;
+  field.appendChild(el);
+  const c = {
+    p, el, i,
+    x:0, y:0,
+    vx:(Math.random()-.5)*.22, vy:(Math.random()-.5)*.22,
+    rot:(Math.random()*5-2.5),
+    phase:Math.random()*Math.PI*2,
+    paused:false, target:null, scale:1
+  };
+  el.addEventListener('mouseenter',()=>{c.paused=true; el.classList.add('hover')});
+  el.addEventListener('mouseleave',()=>{c.paused=false; el.classList.remove('hover')});
+  el.addEventListener('click',()=>openDossier(p));
+  el.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault(); openDossier(p);} });
+  return c;
+}
+function buildField(){ field.innerHTML=''; cards = PROJECTS.map(makeCard); }
+
+/* initial scatter */
+function scatter(){
+  const W=innerWidth, H=innerHeight;
+  cards.forEach(c=>{
+    c.x = 60 + Math.random()*(W-340);
+    c.y = 110 + Math.random()*(H-340);
+  });
+}
+
+/* physics: drift + soft separation; filter = magnetization */
+let activeCat='all';
+function tick(){
+  if(isMobile()) return;            // mobile uses static flow layout
+  const W=innerWidth, H=innerHeight;
+  const t=performance.now()/1000;
+  for(const c of cards){
+    if(c.target){                   // pulled into the lattice
+      c.x += (c.target.x - c.x)*.07;
+      c.y += (c.target.y - c.y)*.07;
+    } else if(!c.paused && !reducedMotion){
+      c.x += c.vx; c.y += c.vy;
+      c.y += Math.sin(t*.7 + c.phase)*.12;   // bob
+      if(c.x<24 || c.x>W-244){c.vx*=-1; c.x=Math.max(24,Math.min(W-244,c.x))}
+      if(c.y<96 || c.y>H-260){c.vy*=-1; c.y=Math.max(96,Math.min(H-260,c.y))}
+    }
+    // soft separation so cards don't pile up
+    for(const o of cards){
+      if(o===c) continue;
+      const dx=c.x-o.x, dy=c.y-o.y, d=Math.hypot(dx,dy);
+      if(d>1 && d<200){ const f=(200-d)/200*.35; c.x+=dx/d*f; c.y+=dy/d*f; }
+    }
+    const wob = (c.target||reducedMotion) ? 0 : Math.sin(t*.5+c.phase)*1.2;
+    c.el.style.transform =
+      `translate(${c.x}px, ${c.y}px) rotate(${c.rot + wob}deg) scale(${c.scale})`;
+  }
+}
+
+/* filtering: matching works snap into a loose lattice, the rest scatter dim */
+function applyFilter(cat){
+  activeCat=cat;
+  document.querySelectorAll('.f-btn').forEach(b=>
+    b.setAttribute('aria-pressed', String(b.dataset.cat===cat)));
+  if(isMobile()){ // simple show/dim on mobile
+    cards.forEach(c=>{
+      const hit = cat==='all'||c.p.category===cat;
+      c.el.classList.toggle('dim',!hit);
+    });
+    return;
+  }
+  const W=innerWidth, H=innerHeight;
+  const hits = cards.filter(c=>cat==='all'||c.p.category===cat);
+  const miss = cards.filter(c=>!hits.includes(c));
+  if(cat==='all'){
+    cards.forEach(c=>{c.target=null;c.scale=1;c.el.classList.remove('dim','lit')});
+    return;
+  }
+  // lattice for hits, centered
+  const cols=Math.min(hits.length, Math.max(1, Math.floor((W-160)/260)));
+  const rows=Math.ceil(hits.length/cols);
+  const gx=260, gy=240;
+  const ox=(W-cols*gx)/2+20, oy=(H-rows*gy)/2;
+  hits.forEach((c,k)=>{
+    const col=k%cols, row=Math.floor(k/cols);
+    c.target={ x: ox+col*gx+(Math.random()*16-8), y: Math.max(100,oy+row*gy+(Math.random()*16-8)) };
+    c.scale=1.06; c.el.classList.add('lit'); c.el.classList.remove('dim');
+  });
+  // misses pushed toward the edges, dimmed
+  miss.forEach(c=>{
+    const cx=W/2, cy=H/2;
+    const ang=Math.atan2(c.y-cy, c.x-cx)+(Math.random()*.5-.25);
+    const rad=Math.min(W,H)*.55;
+    c.target={ x: Math.max(10,Math.min(W-230, cx+Math.cos(ang)*rad)),
+               y: Math.max(90,Math.min(H-250, cy+Math.sin(ang)*rad)) };
+    c.scale=.55; c.el.classList.add('dim'); c.el.classList.remove('lit');
+  });
+  // release targets after settle so the field keeps drifting gently
+  setTimeout(()=>{ cards.forEach(c=>{ if(activeCat===cat) c.target=null; }); }, 1400);
+}
+document.querySelectorAll('.f-btn').forEach(b=>
+  b.addEventListener('click',()=>applyFilter(b.dataset.cat)));
+
+/* ---------- dossier ---------- */
+const dossier=document.getElementById('dossier');
+function mediaFigure(m){
+  const f=document.createElement('figure');
+  let inner='';
+  if(m.type==='youtube' && m.id){
+    inner=`<iframe src="https://www.youtube-nocookie.com/embed/${m.id}" allowfullscreen loading="lazy"></iframe>`;
+    f.classList.add('wide');
+  } else if(m.type==='vimeo' && m.id){
+    inner=`<iframe src="https://player.vimeo.com/video/${m.id}" allowfullscreen loading="lazy"></iframe>`;
+    f.classList.add('wide');
+  } else if(m.type==='file' && m.src){
+    inner=`<video src="${m.src}" controls preload="metadata"></video>`;
+    f.classList.add('wide');
+  } else if(m.type==='image' && (m.image || m.src)){
+    inner=`<img class="frame" src="${m.image || m.src}" alt="" loading="lazy">`;
+  } else {
+    inner=`<div class="frame" style="display:flex;align-items:center;justify-content:center;
+      font-family:var(--mono);font-size:11px;color:var(--steel)">[ ${m.type} placeholder ]</div>`;
+  }
+  f.innerHTML = inner + `<figcaption>${m.caption||''}</figcaption>`;
+  return f;
+}
+function openDossier(p){
+  document.getElementById('dTitle').textContent=p.title;
+  document.getElementById('dSub').textContent=`${p.category} · ${p.year}`;
+  document.getElementById('dLede').textContent=p.blurb;
+  const desc=document.getElementById('dDesc'); desc.innerHTML='';
+  p.description.forEach(t=>{const el=document.createElement('p');el.textContent=t;desc.appendChild(el)});
+  const med=document.getElementById('dMedia'); med.innerHTML='';
+  p.media.forEach(m=>med.appendChild(mediaFigure(m)));
+  openOverlay(dossier);
+}
+
+/* ---------- workbench ---------- */
+function buildWorkbench(){
+  const feed=document.getElementById('logFeed'); feed.innerHTML='';
+  [...WORKBENCH_FEED].sort((a,b)=>String(b.date).localeCompare(String(a.date))).forEach(e=>{
+    const d=document.createElement('div'); d.className='log-entry';
+    let media='';
+    if(e.videotype==='youtube' && e.video)
+      media=`<div class="log-media"><iframe src="https://www.youtube-nocookie.com/embed/${e.video}" allowfullscreen loading="lazy"></iframe></div>`;
+    else if(e.videotype==='vimeo' && e.video)
+      media=`<div class="log-media"><iframe src="https://player.vimeo.com/video/${e.video}" allowfullscreen loading="lazy"></iframe></div>`;
+    else if(e.videotype==='file' && e.video)
+      media=`<div class="log-media"><video src="${e.video}" controls preload="metadata"></video></div>`;
+    d.innerHTML=`<div class="log-head"><span class="log-date">${e.date||''}</span>
+      <span class="log-title">${e.title||''}</span></div>
+      <div class="log-note">${e.note||''}</div>${media}`;
+    feed.appendChild(d);
+  });
+}
+
+/* ---------- overlay plumbing ---------- */
+let lastFocus=null;
+function openOverlay(ov){ lastFocus=document.activeElement; ov.classList.add('open'); ov.querySelector('.x').focus(); }
+function closeOverlay(ov){ ov.classList.remove('open'); if(lastFocus) lastFocus.focus(); }
+document.querySelectorAll('.overlay').forEach(ov=>{
+  ov.addEventListener('click',e=>{ if(e.target===ov) closeOverlay(ov); });
+  ov.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeOverlay(ov)));
+});
+addEventListener('keydown',e=>{
+  if(e.key==='Escape') document.querySelectorAll('.overlay.open').forEach(closeOverlay);
+});
+document.getElementById('workbenchBtn').addEventListener('click',()=>{buildWorkbench();openOverlay(document.getElementById('workbench'))});
+document.getElementById('infoBtn').addEventListener('click',()=>openOverlay(document.getElementById('info')));
+
+/* go */
+let running=false;
+function startLoop(){ if(!running){ running=true; requestAnimationFrame(loop); } }
+function loop(){
+  if(isMobile()){ running=false; cards.forEach(c=>c.el.style.transform=''); return; }
+  tick(); requestAnimationFrame(loop);
+}
+addEventListener('resize',()=>{
+  if(isMobile()){ cards.forEach(c=>c.el.style.transform=''); }
+  else { scatter(); startLoop(); }
+});
+async function loadJSON(path){
+  const r = await fetch(path);
+  if(!r.ok) throw new Error(path);
+  return r.json();
+}
+(async ()=>{
+  try{
+    const [pj, wb] = await Promise.all([
+      loadJSON('content/projects.json'),
+      loadJSON('content/workbench.json')
+    ]);
+    PROJECTS = pj.projects || [];
+    WORKBENCH_FEED = wb.entries || [];
+  }catch(err){
+    field.innerHTML = `<div style="position:absolute;top:45%;left:50%;transform:translate(-50%,-50%);
+      max-width:420px;background:var(--card);border:1px solid var(--ink);box-shadow:5px 5px 0 var(--ink);
+      padding:20px;font-family:var(--mono);font-size:12.5px;line-height:1.7">
+      Could not load <b>content/projects.json</b>.<br><br>
+      If you are previewing this from a local file, browsers block fetch() —
+      run <b>python3 -m http.server</b> in the site folder and open
+      <b>localhost:8000</b>, or just deploy the folder (see README).</div>`;
+    return;
+  }
+  buildField();
+  scatter();
+  startLoop();
+})();
+</script>
+</body>
+</html>

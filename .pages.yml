@@ -1,0 +1,91 @@
+# Pages CMS configuration — this file defines the editing forms you see
+# at https://pagescms.org after signing in with GitHub.
+# Docs: https://pagescms.org/docs
+
+media:
+  input: media
+  output: media
+
+content:
+  - name: projects
+    label: Projects
+    type: file
+    path: content/projects.json
+    fields:
+      - name: projects
+        label: Projects (drag to reorder)
+        type: object
+        list: true
+        fields:
+          - name: title
+            label: Title
+            type: string
+            required: true
+          - name: year
+            label: Year
+            type: string
+          - name: category
+            label: Category
+            type: select
+            options:
+              values: [installation, video, other]
+          - name: blurb
+            label: One-sentence blurb (shown on hover)
+            type: text
+          - name: cover
+            label: Cover image (leave empty for a generated pattern)
+            type: image
+          - name: description
+            label: Description paragraphs
+            type: text
+            list: true
+          - name: media
+            label: Documentation & process media (drag to reorder)
+            type: object
+            list: true
+            fields:
+              - name: type
+                label: Type
+                type: select
+                options:
+                  values: [image, youtube, vimeo, file]
+              - name: image
+                label: Image (if type = image)
+                type: image
+              - name: id
+                label: YouTube / Vimeo video ID (if type = youtube or vimeo)
+                type: string
+              - name: src
+                label: Direct .mp4 URL (if type = file)
+                type: string
+              - name: caption
+                label: Caption
+                type: string
+
+  - name: workbench
+    label: Workbench (work in progress)
+    type: file
+    path: content/workbench.json
+    fields:
+      - name: entries
+        label: Log entries (newest shown first automatically)
+        type: object
+        list: true
+        fields:
+          - name: date
+            label: Date
+            type: date
+          - name: title
+            label: Title
+            type: string
+          - name: note
+            label: Note
+            type: text
+          - name: videotype
+            label: Video source
+            type: select
+            options:
+              values: [none, youtube, vimeo, file]
+          - name: video
+            label: YouTube/Vimeo ID — or direct .mp4 URL if source = file
+            type: string

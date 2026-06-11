@@ -1,0 +1,177 @@
+{
+  "projects": [
+    {
+      "title": "Substrate Command",
+      "year": "2026",
+      "category": "installation",
+      "blurb": "A projected mycelium colony grows, stalls and speaks back, feeding on the presence of whoever stands before it.",
+      "cover": "",
+      "description": [
+        "Substrate Command is an interactive projection in which a generative mycelium network grows in real time, steered by Kinect-tracked human presence. Visitors are read as nutrients and disturbances at once: approach feeds the colony, stillness lets it consolidate, sudden movement makes it retreat.",
+        "An AI narrator periodically interprets the colony’s state and prints terse status reports on a thermal receipt printer — a paper trail of a relationship between organism and audience. A three-layer generative sound system (TouchDesigner + Ableton) renders growth, decay and alarm as audio."
+      ],
+      "media": [
+        {
+          "type": "image",
+          "image": "",
+          "caption": "Installation view — replace with your photo"
+        },
+        {
+          "type": "image",
+          "image": "",
+          "caption": "Receipt printer output"
+        },
+        {
+          "type": "youtube",
+          "id": "",
+          "caption": "Documentation video — paste YouTube ID"
+        },
+        {
+          "type": "image",
+          "image": "",
+          "caption": "Process: Kinect calibration in TouchDesigner"
+        }
+      ]
+    },
+    {
+      "title": "Digital Window",
+      "year": "2026",
+      "category": "installation",
+      "blurb": "A rolling window frame breathes ultrasonic mist at whoever comes close — an operating system rendered as weather.",
+      "cover": "",
+      "description": [
+        "A 1.20 m × 95 cm frame styled after a desktop window, mounted on a rolling steel trolley. Ultrasonic mist fills the frame and reacts to viewer proximity: the closer you come, the more the “window” exhales.",
+        "Driven by an ESP32 running a state-machine interaction model with a WiFi manual-override mode, MOSFET-switched fans and mist generators. The piece treats the interface metaphor literally — a window that has weather instead of content."
+      ],
+      "media": [
+        {
+          "type": "image",
+          "image": "",
+          "caption": "Installation view"
+        },
+        {
+          "type": "image",
+          "image": "",
+          "caption": "Process: trolley and electronics"
+        },
+        {
+          "type": "file",
+          "src": "",
+          "caption": "Mist reaction test — paste a direct .mp4 link"
+        }
+      ]
+    },
+    {
+      "title": "Living Monolith",
+      "year": "2026",
+      "category": "installation",
+      "blurb": "Hand-wound electromagnets breathe beneath a skin of iron filings, making an invisible field momentarily visible.",
+      "cover": "",
+      "description": [
+        "A sculpture built around hand-wound coils on a mild-steel core. Iron filings on its surface stand up, shiver and collapse as the electromagnetic field below them breathes — slow cycles interrupted by sudden freezes.",
+        "The work began as a ferrofluid study and pivoted to dry filings after long material research; the result is harsher and more mineral, closer to a geological process than a fluid one. States are switchable over WiFi."
+      ],
+      "media": [
+        {
+          "type": "image",
+          "image": "",
+          "caption": "Surface detail — filings under field"
+        },
+        {
+          "type": "image",
+          "image": "",
+          "caption": "Process: coil winding"
+        },
+        {
+          "type": "youtube",
+          "id": "",
+          "caption": "Breathing cycle, 2 min"
+        }
+      ]
+    },
+    {
+      "title": "Glitch Explorer",
+      "year": "2026",
+      "category": "other",
+      "blurb": "Three performers browse the web while a hacked extension turns the colors under their cursors into a synchronized score.",
+      "cover": "",
+      "description": [
+        "A Chrome extension that turns ordinary browsing into ensemble performance. As three performers move their cursors across web pages, scanned pixel colors drive a shared six-instrument sound engine over the network.",
+        "The sound world borrows from Ryoji Ikeda — sine bursts, clicks, data noise — so that the visual texture of the everyday web is heard as signal traffic."
+      ],
+      "media": [
+        {
+          "type": "image",
+          "image": "",
+          "caption": "Performance view"
+        },
+        {
+          "type": "vimeo",
+          "id": "",
+          "caption": "Live set excerpt — paste Vimeo ID"
+        },
+        {
+          "type": "image",
+          "image": "",
+          "caption": "Process: role architecture sketch"
+        }
+      ]
+    },
+    {
+      "title": "Reading the Lots, Hearing the Horse",
+      "year": "2026",
+      "category": "other",
+      "blurb": "An artistic research project treating pre-industrial divination as a serious collective decision technology.",
+      "cover": "",
+      "description": [
+        "A research article and pair of A2 posters examining how pre-industrial communities outsourced hard decisions to procedures — cast lots, horse omens, river voices — and what these systems share with contemporary decision infrastructure.",
+        "The text moves from Germanic lot-casting through the legal personhood of the Whanganui River to Andean ayllu practice, set in a punk-zine print language."
+      ],
+      "media": [
+        {
+          "type": "image",
+          "image": "",
+          "caption": "Poster A — riso/zine aesthetic"
+        },
+        {
+          "type": "image",
+          "image": "",
+          "caption": "Poster B"
+        },
+        {
+          "type": "image",
+          "image": "",
+          "caption": "Spread from the article"
+        }
+      ]
+    },
+    {
+      "title": "Saba CVC 75 N, Reborn",
+      "year": "2025",
+      "category": "video",
+      "blurb": "A 1980s tube camera converted into a tapeless digital rig — Newvicon ghosting and all.",
+      "cover": "",
+      "description": [
+        "A vintage Saba CVC 75 N video camera (a rebadged Hitachi with a Newvicon pickup tube) converted to record without its long-dead cassette deck: a mini DVR and 12 V battery pack replace the original recorder via the 10-pin EIAJ connector.",
+        "The tube’s smearing, blooming and comet-tail highlights become the material of ongoing video work — an analog sensor misbehaving beautifully inside a digital pipeline."
+      ],
+      "media": [
+        {
+          "type": "image",
+          "image": "",
+          "caption": "The rig"
+        },
+        {
+          "type": "file",
+          "src": "",
+          "caption": "Tube footage sample — .mp4 link"
+        },
+        {
+          "type": "image",
+          "image": "",
+          "caption": "Process: EIAJ pinout mapping"
+        }
+      ]
+    }
+  ]
+}
